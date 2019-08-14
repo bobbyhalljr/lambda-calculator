@@ -4,7 +4,7 @@ const OperatorButton = (props) => {
   console.log(props.operator.value)
   return (
     <>
-    <button onClick={() => props.addOperator(props.operator.value) }>
+    <button className={'operator-button'} onClick={() => props.addOperator(props.operator.value) }>
       {props.operator.char}
     </button>
     </>
