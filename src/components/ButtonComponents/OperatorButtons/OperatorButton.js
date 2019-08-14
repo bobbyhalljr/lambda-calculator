@@ -1,10 +1,10 @@
 import React from "react";
 
 const OperatorButton = (props) => {
-  console.log(props)
+  console.log(props.operator.value)
   return (
     <>
-    <button>
+    <button onClick={() => props.addOperator(props.operator.value) }>
       {props.operator.char}
     </button>
     </>

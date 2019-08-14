@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // STEP 4 - import the button and display components
 // Don't forget to import any extra css/scss files you build into the correct component
 
@@ -6,7 +6,8 @@ import React from "react";
 import Logo from "./components/DisplayComponents/Logo";
 import Display from './components/DisplayComponents/Display.js';
 import Numbers from './components/ButtonComponents/NumberButtons/Numbers.js';
-import Operators from './components/ButtonComponents/OperatorButtons/Operators.js'
+import Operators from './components/ButtonComponents/OperatorButtons/Operators.js';
+import Specials from './components/ButtonComponents/SpecialButtons/Specials.js';
 
 import "./App.css";
 
@@ -17,6 +18,23 @@ function App() {
   // the "5" button, or the operator if they click one of those buttons) and then call your setter function to update state.
   // Don't forget to pass the functions (and any additional data needed) to the components as props
 
+  const initialState = useState('')
+  const [displayValue, setdisplayValue] = initialState;
+  const addNumber = (number) => {
+    setdisplayValue(displayValue => displayValue + number);
+  }
+  const addOperator = (operator) => {
+    if(operator === '=') {
+      setdisplayValue(displayValue => eval(displayValue));
+    } else {
+      setdisplayValue(`${displayValue} ${operator}`);
+    }
+  } 
+
+  const clearSpecial = (clearSpecial) => {
+    setdisplayValue(displayValue => initialState)
+  }
+
   return (
     <div className="container">
        <Logo />
@@ -24,9 +42,10 @@ function App() {
         {/* STEP 4 - Render your components here and be sure to properly import/export all files */}
         <div className="display">
           <div>
-            <Display number={0} />
-            <Numbers />
-            <Operators />
+            <Display number={displayValue} />
+            <Numbers addNumber={addNumber}/>
+            <Operators addOperator={addOperator} />
+            <Specials clearSpecial={clearSpecial}/>
           </div>
         </div>
       </div>
